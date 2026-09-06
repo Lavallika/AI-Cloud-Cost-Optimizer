@@ -6,6 +6,7 @@ const pool = require("./config/db");
 const costRoutes = require("./routes/costRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.get("/api/db-test", async (req, res) => {
 });
 
 // API routes
+app.use("/api/auth", authRoutes);
 app.use("/api/costs", costRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/recommendations", recommendationRoutes);

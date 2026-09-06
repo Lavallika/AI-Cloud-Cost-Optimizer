@@ -5,11 +5,16 @@ import {
   Lightbulb, 
   Settings,
   X,
-  Sparkles
+  Sparkles,
+  LogOut
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 function Sidebar({ isOpen, onClose }) {
+  const { user, logout } = useAuth();
+
   const getNavLinkClass = ({ isActive }) => `
     w-full flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors duration-150 cursor-pointer
     ${isActive 
@@ -19,6 +24,12 @@ function Sidebar({ isOpen, onClose }) {
 
   const handleNavClick = () => {
     if (onClose) onClose();
+  };
+
+  const handleLogout = () => {
+    if (onClose) onClose();
+    logout();
+    toast.success("Logged out successfully");
   };
 
   return (
@@ -51,7 +62,7 @@ function Sidebar({ isOpen, onClose }) {
           <button 
             onClick={onClose}
             aria-label="Close sidebar"
-            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="md:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
           >
             <X size={20} />
           </button>
@@ -127,9 +138,31 @@ function Sidebar({ isOpen, onClose }) {
         </NavLink>
       </nav>
 
-      {/* Footer info badge */}
-      <div className="pt-4 border-t border-slate-800/80 px-3 py-2">
-        <div className="flex items-center gap-2 text-xs text-slate-400">
+      {/* Footer Area: User details + AI Status badge */}
+      <div className="pt-4 border-t border-slate-800/80 px-2 space-y-3">
+        {user && (
+          <div className="flex items-center justify-between p-2 rounded-lg bg-slate-800/50 border border-slate-700/50">
+            <div className="flex items-center gap-2.5 overflow-hidden">
+              <div className="w-7 h-7 rounded-full bg-indigo-600/30 text-indigo-300 flex items-center justify-center font-bold text-xs border border-indigo-500/30 shrink-0">
+                {user?.name ? user.name[0].toUpperCase() : "U"}
+              </div>
+              <div className="truncate">
+                <p className="text-xs font-medium text-slate-200 truncate">{user?.name || "User"}</p>
+                <p className="text-[10px] text-slate-400 truncate">{user?.email || ""}</p>
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              title="Log out"
+              className="p-1.5 rounded-md text-slate-400 hover:text-red-400 hover:bg-slate-700/50 transition-colors cursor-pointer"
+              aria-label="Log out"
+            >
+              <LogOut size={15} />
+            </button>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 px-1 text-xs text-slate-400">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>AI Engine Active</span>
         </div>
