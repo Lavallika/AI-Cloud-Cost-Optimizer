@@ -1,0 +1,20 @@
+{
+  "model_name": "RandomForestRegressor",
+  "mae": 1141.71,
+  "rmse": 2083.53,
+  "r2": 0.9539,
+  "training_records": 92,
+  "test_records": 24,
+  "features": [
+    "provider",
+    "service",
+    "region",
+    "cpu_utilization",
+    "memory_utilization",
+    "storage_utilization",
+    "usage_hours",
+    "request_count",
+    "data_transfer_gb"
+  ],
+  "trained_at": "2026-09-03T17:19:49.158364Z"
+}

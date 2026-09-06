@@ -1,0 +1,117 @@
+provider,service,region,resource_type,instance_type,cpu_utilization,memory_utilization,storage_utilization,monthly_cost,usage_hours,request_count,data_transfer_gb
+AWS,EC2,US East (N. Virginia),EC2 Instance,t3.large,14.5,28.0,45.0,5200.0,720,0,120.5
+AWS,EC2,US East (N. Virginia),EC2 Instance,m5.xlarge,82.4,75.0,60.0,14200.0,720,0,450.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,c5.large,22.0,32.5,50.0,6800.0,650,0,95.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,t3.medium,78.0,68.0,40.0,2600.0,720,0,80.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,25.0,2100.0,720,450000,850.0
+AWS,S3,Asia Pacific (Mumbai),S3 Storage,Standard Storage,0.0,0.0,85.0,4800.0,720,1200000,2100.0
+AWS,S3,US East (N. Virginia),S3 Storage,Intelligent-Tiering,0.0,0.0,70.0,1450.0,720,250000,410.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.t3.large,18.0,34.0,55.0,3450.0,680,0,180.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.m5.xlarge,76.5,81.0,65.0,18500.0,720,0,920.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.t3.medium,64.0,58.0,45.0,2200.0,720,0,110.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,1024 MB,12.0,26.0,0.0,1200.0,0,1200000,45.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,512 MB,45.0,62.0,0.0,650.0,0,850000,28.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,2048 MB,15.0,31.0,0.0,2400.0,0,1500000,90.0
+Azure,Virtual Machines,Central India,Virtual Machine,D4s v5,16.0,22.0,38.0,4200.0,540,0,140.0
+Azure,Virtual Machines,Central India,Virtual Machine,B2s,72.0,64.0,50.0,1800.0,720,0,65.0
+Azure,Virtual Machines,West Europe,Virtual Machine,E4s v5,24.5,35.0,42.0,7800.0,720,0,210.0
+Azure,Blob Storage,Central India,Blob Storage,Hot Tier,0.0,0.0,32.0,1450.0,720,320000,380.0
+Azure,Blob Storage,West Europe,Blob Storage,Cool Tier,0.0,0.0,88.0,2100.0,720,890000,1100.0
+Azure,SQL Database,Central India,SQL Database,vCore 4,21.0,38.0,40.0,3100.0,720,0,160.0
+Azure,SQL Database,Central India,SQL Database,vCore 2,68.0,74.0,60.0,1900.0,720,0,95.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-4,19.0,31.0,48.0,2800.0,460,0,115.0
+GCP,Compute Engine,Mumbai,Compute Instance,n1-standard-2,84.0,79.0,55.0,3100.0,720,0,240.0
+GCP,Compute Engine,us-central1,Compute Instance,n2-standard-8,23.0,36.0,30.0,12500.0,720,0,510.0
+GCP,Cloud Storage,Mumbai,Cloud Storage,Standard,0.0,0.0,35.0,980.0,720,180000,210.0
+GCP,Cloud Storage,us-central1,Cloud Storage,Nearline,0.0,0.0,90.0,1650.0,720,620000,940.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,c5.xlarge,16.5,29.0,50.0,9800.0,720,0,280.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,t3.micro,88.0,82.0,60.0,750.0,720,0,25.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,t3.small,25.0,38.0,42.0,1400.0,720,0,45.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,18.0,3200.0,720,600000,1200.0
+AWS,S3,Asia Pacific (Mumbai),S3 Storage,Standard Storage,0.0,0.0,28.0,1850.0,720,310000,450.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.m5.large,22.0,38.0,44.0,7200.0,720,0,310.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.t3.small,70.0,65.0,50.0,1250.0,720,0,60.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,2048 MB,18.0,24.0,0.0,3100.0,0,2100000,140.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,256 MB,82.0,78.0,0.0,380.0,0,420000,18.0
+Azure,Virtual Machines,Central India,Virtual Machine,D8s v5,20.0,32.0,35.0,11200.0,720,0,480.0
+Azure,Virtual Machines,Central India,Virtual Machine,D2s v5,65.0,62.0,45.0,2800.0,720,0,110.0
+Azure,Blob Storage,Central India,Blob Storage,Hot Tier,0.0,0.0,22.0,2600.0,720,490000,620.0
+Azure,SQL Database,Central India,SQL Database,vCore 8,24.0,39.0,41.0,8900.0,720,0,390.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-8,21.0,34.0,39.0,8600.0,720,0,320.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-2,75.0,71.0,52.0,1950.0,720,0,85.0
+GCP,Cloud Storage,Mumbai,Cloud Storage,Standard,0.0,0.0,26.0,1420.0,720,290000,390.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,m5.2xlarge,18.0,27.0,40.0,28400.0,720,0,980.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,r5.large,79.0,85.0,62.0,8200.0,720,0,310.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,34.0,4100.0,720,780000,1600.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.r5.large,26.0,39.0,42.0,11400.0,720,0,420.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,1536 MB,14.0,29.0,0.0,1950.0,0,1100000,75.0
+Azure,Virtual Machines,Central India,Virtual Machine,E2s v5,17.5,31.0,36.0,3900.0,720,0,130.0
+Azure,SQL Database,Central India,SQL Database,vCore 2,28.0,42.0,44.0,2400.0,720,0,105.0
+GCP,Compute Engine,Mumbai,Compute Instance,n2-standard-4,22.0,33.0,37.0,5400.0,720,0,210.0
+GCP,Cloud Storage,Mumbai,Cloud Storage,Standard,0.0,0.0,29.0,1150.0,720,210000,290.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,t3.large,55.0,60.0,48.0,5500.0,720,0,130.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,m5.large,88.0,84.0,65.0,7600.0,720,0,290.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,c5.2xlarge,35.0,42.0,50.0,19200.0,720,0,650.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,t3.xlarge,72.0,70.0,55.0,4900.0,720,0,185.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.m5.2xlarge,45.0,55.0,60.0,24000.0,720,0,820.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.t3.large,80.0,82.0,70.0,4200.0,720,0,220.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,55.0,5600.0,720,950000,1900.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,512 MB,60.0,72.0,0.0,800.0,0,980000,35.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,1024 MB,40.0,50.0,0.0,1100.0,0,1050000,50.0
+Azure,Virtual Machines,West Europe,Virtual Machine,D4s v5,50.0,58.0,45.0,5200.0,700,0,200.0
+Azure,Virtual Machines,Central India,Virtual Machine,F4s v2,68.0,72.0,50.0,3600.0,720,0,145.0
+Azure,SQL Database,West Europe,SQL Database,vCore 4,55.0,60.0,55.0,4500.0,720,0,210.0
+Azure,Blob Storage,West Europe,Blob Storage,Hot Tier,0.0,0.0,45.0,2200.0,720,420000,510.0
+GCP,Compute Engine,us-central1,Compute Instance,n1-standard-4,65.0,68.0,55.0,5800.0,720,0,290.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-4,80.0,78.0,60.0,3400.0,720,0,180.0
+GCP,Cloud Storage,us-central1,Cloud Storage,Standard,0.0,0.0,60.0,2100.0,720,480000,720.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,m5.4xlarge,28.0,35.0,45.0,55000.0,720,0,1800.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,c5.4xlarge,55.0,62.0,52.0,36000.0,720,0,1100.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.r5.2xlarge,32.0,48.0,55.0,42000.0,720,0,1500.0
+AWS,S3,Asia Pacific (Mumbai),S3 Storage,Standard Storage,0.0,0.0,42.0,6200.0,720,1100000,2500.0
+Azure,Virtual Machines,Central India,Virtual Machine,E8s v5,22.0,30.0,38.0,18500.0,720,0,680.0
+Azure,SQL Database,Central India,SQL Database,vCore 16,30.0,45.0,50.0,16800.0,720,0,720.0
+GCP,Compute Engine,us-central1,Compute Instance,n2-standard-16,25.0,38.0,42.0,24000.0,720,0,900.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,t3.large,90.0,88.0,72.0,5800.0,720,0,160.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,t3.medium,92.0,90.0,75.0,2900.0,720,0,95.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.t3.medium,85.0,88.0,68.0,3000.0,720,0,140.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,256 MB,88.0,85.0,0.0,420.0,0,550000,22.0
+Azure,Virtual Machines,West Europe,Virtual Machine,B4ms,85.0,80.0,65.0,3200.0,720,0,130.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-2,90.0,88.0,70.0,2200.0,720,0,95.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,r5.2xlarge,42.0,55.0,58.0,22000.0,720,0,750.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,m5.xlarge,50.0,58.0,52.0,15000.0,720,0,500.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.m5.xlarge,50.0,62.0,58.0,19500.0,720,0,780.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,72.0,7800.0,720,1500000,3100.0
+Azure,Virtual Machines,Central India,Virtual Machine,D16s v5,15.0,22.0,32.0,32000.0,600,0,1100.0
+GCP,Compute Engine,us-central1,Compute Instance,n2-standard-32,18.0,28.0,35.0,48000.0,720,0,1600.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,512 MB,55.0,68.0,0.0,720.0,0,780000,32.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,128 MB,78.0,80.0,0.0,280.0,0,380000,14.0
+Azure,Blob Storage,Central India,Blob Storage,Cool Tier,0.0,0.0,78.0,1800.0,720,650000,880.0
+GCP,Cloud Storage,Mumbai,Cloud Storage,Coldline,0.0,0.0,92.0,650.0,720,140000,160.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,t3.large,30.0,38.0,42.0,5100.0,720,0,118.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,c5.large,60.0,65.0,55.0,7100.0,650,0,105.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.m5.large,48.0,55.0,50.0,7800.0,720,0,330.0
+AWS,S3,US East (N. Virginia),S3 Storage,Intelligent-Tiering,0.0,0.0,48.0,1800.0,720,320000,520.0
+Azure,Virtual Machines,West Europe,Virtual Machine,D2s v5,72.0,68.0,55.0,3100.0,720,0,120.0
+GCP,Compute Engine,Mumbai,Compute Instance,n1-standard-2,45.0,50.0,45.0,3400.0,720,0,175.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,r5.4xlarge,38.0,50.0,55.0,44000.0,720,0,1400.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,1024 MB,35.0,42.0,0.0,1300.0,0,1300000,58.0
+Azure,SQL Database,West Europe,SQL Database,vCore 8,42.0,52.0,58.0,9800.0,720,0,420.0
+GCP,Compute Engine,us-central1,Compute Instance,n2-standard-8,70.0,75.0,60.0,13500.0,720,0,580.0
+AWS,EC2,Asia Pacific (Mumbai),EC2 Instance,m5.2xlarge,62.0,68.0,58.0,30000.0,720,0,1050.0
+AWS,RDS,Asia Pacific (Mumbai),RDS Database,db.r5.xlarge,38.0,48.0,52.0,22500.0,720,0,820.0
+Azure,Virtual Machines,Central India,Virtual Machine,D4s v5,78.0,80.0,65.0,4600.0,720,0,175.0
+GCP,Cloud Storage,us-central1,Cloud Storage,Standard,0.0,0.0,48.0,1750.0,720,380000,610.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,c5.xlarge,72.0,76.0,62.0,10500.0,720,0,310.0
+AWS,S3,Asia Pacific (Mumbai),S3 Storage,Standard Storage,0.0,0.0,62.0,7500.0,720,1350000,2900.0
+Azure,Blob Storage,West Europe,Blob Storage,Hot Tier,0.0,0.0,58.0,2900.0,720,560000,720.0
+GCP,Compute Engine,Mumbai,Compute Instance,e2-standard-8,55.0,62.0,52.0,9200.0,720,0,370.0
+AWS,Lambda,Asia Pacific (Mumbai),Lambda Function,256 MB,90.0,88.0,0.0,450.0,0,520000,21.0
+Azure,SQL Database,Central India,SQL Database,vCore 4,72.0,75.0,65.0,3900.0,720,0,185.0
+GCP,Cloud Storage,Mumbai,Cloud Storage,Standard,0.0,0.0,52.0,1600.0,720,340000,440.0
+AWS,EC2,US East (N. Virginia),EC2 Instance,m5.large,68.0,72.0,58.0,8100.0,720,0,320.0
+AWS,RDS,US East (N. Virginia),RDS Database,db.m5.2xlarge,62.0,70.0,65.0,26000.0,720,0,900.0
+Azure,Virtual Machines,West Europe,Virtual Machine,E4s v5,58.0,65.0,55.0,8800.0,720,0,240.0
+GCP,Compute Engine,us-central1,Compute Instance,n1-standard-4,32.0,40.0,42.0,6200.0,720,0,280.0
+AWS,Lambda,US East (N. Virginia),Lambda Function,512 MB,22.0,30.0,0.0,680.0,0,820000,30.0
+AWS,S3,US East (N. Virginia),S3 Storage,Standard Storage,0.0,0.0,80.0,9200.0,720,1800000,3800.0

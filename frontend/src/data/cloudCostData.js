@@ -1,0 +1,122 @@
+export const cloudCostRecords = [
+  {
+    id: 1,
+    provider: "AWS",
+    service: "EC2",
+    region: "US East (N. Virginia)",
+    usage: "720 Hours",
+    currentCost: 5200,
+    previousCost: 4800,
+    trend: 8.3,
+    status: "High",
+    details: "t3.large instance running continuous workload with 82% CPU utilization."
+  },
+  {
+    id: 2,
+    provider: "AWS",
+    service: "S3",
+    region: "US East (N. Virginia)",
+    usage: "450 GB",
+    currentCost: 2100,
+    previousCost: 1950,
+    trend: 7.7,
+    status: "Normal",
+    details: "Standard object storage tier holding application backups and assets."
+  },
+  {
+    id: 3,
+    provider: "AWS",
+    service: "RDS",
+    region: "Asia Pacific (Mumbai)",
+    usage: "680 Hours",
+    currentCost: 3450,
+    previousCost: 3600,
+    trend: -4.2,
+    status: "Optimized",
+    details: "PostgreSQL multi-AZ deployment with reserved instance pricing applied."
+  },
+  {
+    id: 4,
+    provider: "AWS",
+    service: "Lambda",
+    region: "Asia Pacific (Mumbai)",
+    usage: "1.2M Requests",
+    currentCost: 1200,
+    previousCost: 1100,
+    trend: 9.1,
+    status: "Normal",
+    details: "Serverless backend API function invocations during peak traffic."
+  },
+  {
+    id: 5,
+    provider: "Azure",
+    service: "Virtual Machines",
+    region: "Central India",
+    usage: "540 Hours",
+    currentCost: 4200,
+    previousCost: 3900,
+    trend: 7.6,
+    status: "High",
+    details: "Standard D4s v3 VM instance with high idle memory footprint."
+  },
+  {
+    id: 6,
+    provider: "GCP",
+    service: "Compute Engine",
+    region: "Mumbai",
+    usage: "460 Hours",
+    currentCost: 2800,
+    previousCost: 3000,
+    trend: -6.7,
+    status: "Optimized",
+    details: "n1-standard-2 instance benefiting from sustained use discounts."
+  },
+  {
+    id: 7,
+    provider: "AWS",
+    service: "ElastiCache",
+    region: "Asia Pacific (Mumbai)",
+    usage: "720 Hours",
+    currentCost: 1850,
+    previousCost: 1800,
+    trend: 2.8,
+    status: "Normal",
+    details: "Redis cluster cache node supporting database query acceleration."
+  },
+  {
+    id: 8,
+    provider: "Azure",
+    service: "Blob Storage",
+    region: "Central India",
+    usage: "1.2 TB",
+    currentCost: 1450,
+    previousCost: 1500,
+    trend: -3.3,
+    status: "Optimized",
+    details: "Cool access storage tier configured with lifecycle management rules."
+  },
+  {
+    id: 9,
+    provider: "GCP",
+    service: "Cloud Storage",
+    region: "Mumbai",
+    usage: "850 GB",
+    currentCost: 980,
+    previousCost: 950,
+    trend: 3.1,
+    status: "Normal",
+    details: "Multi-regional bucket hosting static web application assets."
+  },
+  {
+    id: 10,
+    provider: "Azure",
+    service: "SQL Database",
+    region: "Central India",
+    usage: "720 Hours",
+    currentCost: 3100,
+    previousCost: 2900,
+    trend: 6.9,
+    status: "High",
+    details: "General Purpose vCore database with unoptimized auto-scaling bounds."
+  }
+];
