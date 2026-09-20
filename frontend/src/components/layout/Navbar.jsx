@@ -1,18 +1,31 @@
 import { useState, useRef, useEffect } from "react";
 import { Bell, User, Menu, LogOut, ChevronDown } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { useNotifications } from "../../context/NotificationContext";
+import NotificationDropdown from "../notifications/NotificationDropdown";
 import toast from "react-hot-toast";
 
 function Navbar({ onToggleSidebar }) {
   const { user, logout } = useAuth();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const { unreadCount, refreshNotifications } = useNotifications();
 
-  // Close dropdown when clicking outside
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [notificationOpen, setNotificationOpen] = useState(false);
+
+  const dropdownRef = useRef(null);
+  const notificationContainerRef = useRef(null);
+
+  // Close dropdowns when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
+      }
+      if (
+        notificationContainerRef.current &&
+        !notificationContainerRef.current.contains(event.target)
+      ) {
+        setNotificationOpen(false);
       }
     }
 
@@ -22,8 +35,41 @@ function Navbar({ onToggleSidebar }) {
     };
   }, []);
 
+  // Close dropdowns on Escape key
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setDropdownOpen(false);
+        setNotificationOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const handleToggleNotification = () => {
+    setDropdownOpen(false);
+    setNotificationOpen((prev) => {
+      const nextState = !prev;
+      if (nextState) {
+        // Refresh notifications when opening dropdown
+        refreshNotifications();
+      }
+      return nextState;
+    });
+  };
+
+  const handleToggleProfile = () => {
+    setNotificationOpen(false);
+    setDropdownOpen((prev) => !prev);
+  };
+
   const handleLogout = () => {
     setDropdownOpen(false);
+    setNotificationOpen(false);
     logout();
     toast.success("Logged out successfully");
   };
@@ -67,20 +113,36 @@ function Navbar({ onToggleSidebar }) {
       {/* Right Side: Notification & User Profile */}
       <div className="flex items-center gap-3">
         
-        {/* Notification Button */}
-        <button
-          className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 transition-colors duration-150 relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
-          aria-label="Notifications"
-        >
-          <Bell size={20} />
-          {/* Notification Dot */}
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-indigo-600 ring-2 ring-white" />
-        </button>
+        {/* Notification Bell & Dropdown */}
+        <div className="relative" ref={notificationContainerRef}>
+          <button
+            onClick={handleToggleNotification}
+            className={`p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 transition-colors duration-150 relative cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20 ${
+              notificationOpen ? "bg-slate-100 text-slate-900" : ""
+            }`}
+            aria-label="Notifications"
+            aria-expanded={notificationOpen}
+          >
+            <Bell size={20} />
+
+            {/* Dynamic Unread Badge */}
+            {unreadCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white shadow-xs">
+                {unreadCount > 9 ? "9+" : unreadCount}
+              </span>
+            )}
+          </button>
+
+          <NotificationDropdown
+            isOpen={notificationOpen}
+            onClose={() => setNotificationOpen(false)}
+          />
+        </div>
 
         {/* Profile Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button
-            onClick={() => setDropdownOpen(!dropdownOpen)}
+            onClick={handleToggleProfile}
             className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg border border-slate-200/80 text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500/20"
             aria-label="User profile menu"
             aria-expanded={dropdownOpen}

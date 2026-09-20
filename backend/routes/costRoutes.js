@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
 const authMiddleware = require("../middleware/authMiddleware");
+const { generateAlertsForCostRecord } = require("../utils/alertGenerator");
 
 /**
  * POST /api/costs
@@ -110,11 +111,19 @@ router.post("/", authMiddleware, async (req, res) => {
     ];
 
     const result = await pool.query(query, values);
+    const createdCostRecord = result.rows[0];
+
+    // Trigger automatic alert generation (fail-safe: will not cause cost record creation to fail)
+    try {
+      await generateAlertsForCostRecord(createdCostRecord, req.user.id);
+    } catch (alertError) {
+      console.error("Alert generation failed:", alertError.message);
+    }
 
     return res.status(201).json({
       success: true,
       message: "Cost record created successfully",
-      data: result.rows[0]
+      data: createdCostRecord
     });
   } catch (error) {
     console.error("Error creating cost record:", error.message);
