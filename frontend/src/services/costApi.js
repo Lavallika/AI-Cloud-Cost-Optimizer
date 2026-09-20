@@ -1,3 +1,5 @@
+import { getAuthHeaders } from "./authApi";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 /**
@@ -84,6 +86,7 @@ export async function fetchCostRecords() {
     const response = await fetch(`${API_URL}/api/costs`, {
       method: "GET",
       headers: {
+        ...getAuthHeaders(),
         Accept: "application/json",
       },
     });
@@ -155,6 +158,7 @@ export async function createCostRecord(recordData) {
     const response = await fetch(`${API_URL}/api/costs`, {
       method: "POST",
       headers: {
+        ...getAuthHeaders(),
         "Content-Type": "application/json",
         Accept: "application/json",
       },
@@ -190,6 +194,7 @@ export async function deleteCostRecord(id) {
     const response = await fetch(`${API_URL}/api/costs/${id}`, {
       method: "DELETE",
       headers: {
+        ...getAuthHeaders(),
         Accept: "application/json",
       },
     });
@@ -233,6 +238,7 @@ export async function fetchAnalytics(periodLabel = "Last 6 Months") {
     const response = await fetch(`${API_URL}/api/analytics?period=${periodCode}`, {
       method: "GET",
       headers: {
+        ...getAuthHeaders(),
         Accept: "application/json",
       },
     });
@@ -368,6 +374,7 @@ export async function fetchRecommendations() {
     const response = await fetch(`${API_URL}/api/recommendations`, {
       method: "GET",
       headers: {
+        ...getAuthHeaders(),
         Accept: "application/json",
       },
     });
@@ -411,6 +418,7 @@ export async function updateRecommendationStatus(id, status = "Reviewed") {
     const response = await fetch(`${API_URL}/api/recommendations/${encodeURIComponent(id)}/status`, {
       method: "PATCH",
       headers: {
+        ...getAuthHeaders(),
         "Content-Type": "application/json",
         Accept: "application/json",
       },

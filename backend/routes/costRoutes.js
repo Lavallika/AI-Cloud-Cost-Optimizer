@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
+const authMiddleware = require("../middleware/authMiddleware");
 
 /**
  * POST /api/costs
- * Create a new cloud cost record in PostgreSQL
+ * Create a new cloud cost record in PostgreSQL.
+ * user_id is taken from req.user.id (JWT) — never from the request body.
  */
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   try {
     const {
       provider,
@@ -28,6 +30,9 @@ router.post("/", async (req, res) => {
       billing_date,
       billingDate
     } = req.body;
+
+    // user_id always comes from the verified JWT — never trust the request body
+    const userId = req.user.id;
 
     const finalProvider = provider;
     const finalService = service;
@@ -68,6 +73,7 @@ router.post("/", async (req, res) => {
 
     const query = `
       INSERT INTO cloud_costs (
+        user_id,
         provider,
         service,
         region,
@@ -82,11 +88,12 @@ router.post("/", async (req, res) => {
         data_transfer_gb,
         billing_date
       )
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
       RETURNING *;
     `;
 
     const values = [
+      userId,
       finalProvider,
       finalService,
       finalRegion,
@@ -121,12 +128,14 @@ router.post("/", async (req, res) => {
 
 /**
  * GET /api/costs
- * Fetch all cost records from PostgreSQL ordered by created_at DESC
+ * Fetch all cost records belonging to the authenticated user only.
  */
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    const query = "SELECT * FROM cloud_costs ORDER BY created_at DESC;";
-    const result = await pool.query(query);
+    const userId = req.user.id;
+
+    const query = "SELECT * FROM cloud_costs WHERE user_id = $1 ORDER BY created_at DESC;";
+    const result = await pool.query(query, [userId]);
 
     return res.json({
       success: true,
@@ -145,13 +154,16 @@ router.get("/", async (req, res) => {
 
 /**
  * GET /api/costs/:id
- * Fetch a single cost record by ID from PostgreSQL
+ * Fetch a single cost record by ID, only if it belongs to the authenticated user.
  */
-router.get("/:id", async (req, res) => {
+router.get("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const query = "SELECT * FROM cloud_costs WHERE id = $1;";
-    const result = await pool.query(query, [id]);
+    const userId = req.user.id;
+
+    // Both id AND user_id must match — prevents IDOR
+    const query = "SELECT * FROM cloud_costs WHERE id = $1 AND user_id = $2;";
+    const result = await pool.query(query, [id, userId]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({
@@ -176,13 +188,16 @@ router.get("/:id", async (req, res) => {
 
 /**
  * DELETE /api/costs/:id
- * Delete a cost record by ID from PostgreSQL
+ * Delete a cost record only if it belongs to the authenticated user.
  */
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const query = "DELETE FROM cloud_costs WHERE id = $1 RETURNING *;";
-    const result = await pool.query(query, [id]);
+    const userId = req.user.id;
+
+    // Both id AND user_id must match — prevents cross-user deletion
+    const query = "DELETE FROM cloud_costs WHERE id = $1 AND user_id = $2 RETURNING *;";
+    const result = await pool.query(query, [id, userId]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({

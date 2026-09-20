@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
+const authMiddleware = require("../middleware/authMiddleware");
 
 const ML_SERVICE_URL = process.env.ML_SERVICE_URL || "http://127.0.0.1:8001";
 
@@ -90,13 +91,15 @@ function evaluateRuleFallback(row) {
 
 /**
  * GET /api/recommendations
- * Generates dynamic recommendations from PostgreSQL cloud_costs records using ML optimization engine
+ * Generates dynamic recommendations from PostgreSQL cloud_costs records belonging to the authenticated user using ML optimization engine
  */
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
-    // 1. Fetch all cloud cost records from PostgreSQL
-    const query = "SELECT * FROM cloud_costs ORDER BY id ASC;";
-    const dbResult = await pool.query(query);
+    const userId = req.user.id;
+
+    // 1. Fetch cloud cost records belonging to the authenticated user from PostgreSQL
+    const query = "SELECT * FROM cloud_costs WHERE user_id = $1 ORDER BY id ASC;";
+    const dbResult = await pool.query(query, [userId]);
     const rows = dbResult.rows;
 
     // 2. Filter records that have utilization data
@@ -258,7 +261,7 @@ router.get("/", async (req, res) => {
  * PATCH /api/recommendations/:id/status
  * Update the review status of a recommendation
  */
-router.patch("/:id/status", (req, res) => {
+router.patch("/:id/status", authMiddleware, (req, res) => {
   try {
     const { id } = req.params;
     const { status = "Reviewed" } = req.body;

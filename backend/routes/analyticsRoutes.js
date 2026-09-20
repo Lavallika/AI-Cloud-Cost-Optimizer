@@ -1,14 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db");
+const authMiddleware = require("../middleware/authMiddleware");
 
 /**
  * GET /api/analytics
  * Fetch dynamic cloud cost analytics calculated from PostgreSQL `cloud_costs` table.
+ * Results are SCOPED to the authenticated user only.
  * Supports query parameter: ?period=7days|30days|3months|6months|12months (default: 6months)
  */
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware, async (req, res) => {
   try {
+    const userId = req.user.id;
     const period = req.query.period || "6months";
 
     let intervalStr = "6 months";
@@ -18,19 +21,20 @@ router.get("/", async (req, res) => {
     else if (period === "6months") intervalStr = "6 months";
     else if (period === "12months") intervalStr = "12 months";
 
-    // Query records matching the requested period
+    // Query records matching the requested period for this user only
     const query = `
       SELECT * FROM cloud_costs
-      WHERE COALESCE(billing_date, created_at::date) >= CURRENT_DATE - ($1::INTERVAL)
+      WHERE user_id = $1
+        AND COALESCE(billing_date, created_at::date) >= CURRENT_DATE - ($2::INTERVAL)
       ORDER BY COALESCE(billing_date, created_at::date) ASC;
     `;
 
-    let result = await pool.query(query, [intervalStr]);
+    let result = await pool.query(query, [userId, intervalStr]);
 
-    // Fallback: If no records fall within the strict interval, check if ANY records exist
+    // Fallback: If no records fall within the strict interval, check if ANY records exist for this user
     if (result.rows.length === 0) {
-      const fallbackQuery = "SELECT * FROM cloud_costs ORDER BY COALESCE(billing_date, created_at::date) ASC;";
-      result = await pool.query(fallbackQuery);
+      const fallbackQuery = "SELECT * FROM cloud_costs WHERE user_id = $1 ORDER BY COALESCE(billing_date, created_at::date) ASC;";
+      result = await pool.query(fallbackQuery, [userId]);
     }
 
     const rows = result.rows;
