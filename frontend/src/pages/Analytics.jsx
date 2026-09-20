@@ -6,7 +6,10 @@ import {
   AlertTriangle,
   Flame,
   Calendar,
+  Download,
 } from "lucide-react";
+
+import ExportReportModal from "../components/reports/ExportReportModal";
 
 import StatCard from "../components/dashboard/StatCard";
 import MonthlyCostChart from "../components/analytics/MonthlyCostChart";
@@ -70,6 +73,7 @@ function Analytics() {
   const [analyticsData, setAnalyticsData] = useState(EMPTY_ANALYTICS);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showExportModal, setShowExportModal] = useState(false);
 
   // Fetch analytics data from PostgreSQL API
   const loadAnalytics = useCallback(async (period) => {
@@ -113,20 +117,32 @@ function Analytics() {
           </p>
         </div>
 
-        {/* Time Period Selector Dropdown */}
-        <div className="relative inline-flex items-center gap-2 self-start sm:self-auto">
-          <Calendar size={16} className="text-indigo-600 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <select
-            value={selectedPeriod}
-            onChange={handlePeriodChange}
-            className="pl-9 pr-8 py-2 text-sm bg-white border border-slate-200/80 rounded-xl text-slate-900 font-semibold shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors cursor-pointer"
+        {/* Time Period Selector + Export Button */}
+        <div className="flex items-center gap-2.5 self-start sm:self-auto">
+          <div className="relative inline-flex items-center gap-2">
+            <Calendar size={16} className="text-indigo-600 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <select
+              value={selectedPeriod}
+              onChange={handlePeriodChange}
+              className="pl-9 pr-8 py-2 text-sm bg-white border border-slate-200/80 rounded-xl text-slate-900 font-semibold shadow-2xs focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors cursor-pointer"
+            >
+              <option value="Last 7 Days">Last 7 Days</option>
+              <option value="Last 30 Days">Last 30 Days</option>
+              <option value="Last 3 Months">Last 3 Months</option>
+              <option value="Last 6 Months">Last 6 Months</option>
+              <option value="Last 12 Months">Last 12 Months</option>
+            </select>
+          </div>
+
+          <button
+            id="btn-export-report"
+            type="button"
+            onClick={() => setShowExportModal(true)}
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs transition-colors cursor-pointer"
           >
-            <option value="Last 7 Days">Last 7 Days</option>
-            <option value="Last 30 Days">Last 30 Days</option>
-            <option value="Last 3 Months">Last 3 Months</option>
-            <option value="Last 6 Months">Last 6 Months</option>
-            <option value="Last 12 Months">Last 12 Months</option>
-          </select>
+            <Download size={16} />
+            <span>Export Report</span>
+          </button>
         </div>
       </div>
 
@@ -196,6 +212,13 @@ function Analytics() {
 
       {/* 5. Dynamic Cost Insights Section (Full Width) */}
       <CostInsights data={currentData.insights} />
+
+      {/* Export Report Modal */}
+      <ExportReportModal
+        isOpen={showExportModal}
+        onClose={() => setShowExportModal(false)}
+        initialPeriod={selectedPeriod}
+      />
     </div>
   );
 }

@@ -11,6 +11,7 @@ import Analytics from "../pages/Analytics";
 import AIRecommendations from "../pages/AIRecommendations";
 import Settings from "../pages/Settings";
 import NotFound from "../pages/NotFound";
+import CostReport from "../pages/CostReport";
 
 function AppRoutes() {
   return (
@@ -46,6 +47,7 @@ function AppRoutes() {
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/ai-recommendations" element={<AIRecommendations />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/reports/cost" element={<CostReport />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
