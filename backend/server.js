@@ -8,6 +8,7 @@ const analyticsRoutes = require("./routes/analyticsRoutes");
 const recommendationRoutes = require("./routes/recommendationRoutes");
 const authRoutes = require("./routes/authRoutes");
 const notificationRoutes = require("./routes/notificationRoutes");
+const notificationPreferenceRoutes = require("./routes/notificationPreferenceRoutes");
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use("/api/costs", costRoutes);
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/recommendations", recommendationRoutes);
 app.use("/api/notifications", notificationRoutes);
+app.use("/api/notification-preferences", notificationPreferenceRoutes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -79,3 +81,5 @@ process.on("uncaughtException", (error) => {
 process.on("unhandledRejection", (error) => {
   console.error("Unhandled Promise Rejection:", error);
 });
+
+module.exports = { app, server };
